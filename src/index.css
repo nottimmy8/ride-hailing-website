@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+body {
+  font-family: "Noto Sans", sans-serif;
+
+  background-color: #fff;
+}
+
+@theme {
+  --color-primary: #2563eb;
+  --color-muted: #4e4c4b;
+  --color-light: #fffee9;
+  --font-noto: "Noto Sans", sans-serif;
+  --font-display: "Bricolage Grotesque", sans-serif;
+}
