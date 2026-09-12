@@ -1,5 +1,5 @@
 import image from "../assets/kabout.jpg";
-import { ArrowRight, ShieldCheck, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const AboutUs: React.FC = () => {
   return (

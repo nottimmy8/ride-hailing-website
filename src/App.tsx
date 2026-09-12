@@ -6,7 +6,6 @@ import AboutUs from "./components/aboutUs";
 import EarnWithKeyen from "./components/earnwithkeyen";
 import DownloadApp from "./components/downloadApp";
 import Footer from "./components/footer";
-// import WaitlistForm from "./components/waitlistForm";
 
 const App = () => {
   return (
@@ -17,7 +16,7 @@ const App = () => {
       <HowItWorks />
       <AboutUs />
       <EarnWithKeyen />
-      {/* <DownloadApp /> */}
+      <DownloadApp />
       <Footer />
     </div>
   );

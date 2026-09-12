@@ -1,5 +1,3 @@
-import React from "react";
-import { Zap, MapPin, Star, Shield } from "lucide-react";
 import bgImg from "../assets/download_app_bg.jpg";
 import phoneImg from "../assets/phone_mockup_app.jpg";
 
