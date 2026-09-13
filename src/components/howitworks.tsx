@@ -8,29 +8,31 @@ import {
   Navigation,
   ChevronRight,
 } from "lucide-react";
-
-const stepsData = [
-  {
-    id: 1,
-    title: "Request",
-    description: "Choose your service and enter your destination in seconds.",
-    icon: <MapPin className="w-6 h-6" />,
-  },
-  {
-    id: 2,
-    title: "Connect",
-    description: "Keyen matches you with the right mobility partner nearby.",
-    icon: <Users className="w-6 h-6" />,
-  },
-  {
-    id: 3,
-    title: "Move",
-    description: "Track your journey live and enjoy a seamless experience.",
-    icon: <Car className="w-6 h-6" />,
-  },
-];
+import { useLanguage } from "../context/LanguageContext";
 
 const HowItWorks: React.FC = () => {
+  const { t } = useLanguage();
+
+  const stepsData = [
+    {
+      id: 1,
+      title: t.how_step1_title,
+      description: t.how_step1_desc,
+      icon: <MapPin className="w-6 h-6" />,
+    },
+    {
+      id: 2,
+      title: t.how_step2_title,
+      description: t.how_step2_desc,
+      icon: <Users className="w-6 h-6" />,
+    },
+    {
+      id: 3,
+      title: t.how_step3_title,
+      description: t.how_step3_desc,
+      icon: <Car className="w-6 h-6" />,
+    },
+  ];
   const [activeStep, setActiveStep] = useState(1);
   const [progress, setProgress] = useState(0);
 
@@ -59,16 +61,15 @@ const HowItWorks: React.FC = () => {
       <div className="max-w-6xl w-full mx-auto px-4 sm:px-6">
         {/* Header Description / Title */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h6 className="text-[10px] font-bold mb-4 uppercase tracking-widest text-primary font-display">
-            Seamless Mobility
-          </h6>
-          <h2 className="text-3xl md:text-5xl font-bold font-display text-gray-900 mb-4 tracking-tight">
-            How It <span className="text-primary">Works</span>
-          </h2>
-          <p className="text-sm md:text-base text-gray-600 max-w-md mx-auto leading-relaxed">
-            Experience effortless, verified rides with Keyen in three simple
-            steps.
-          </p>
+            <h6 className="text-[10px] font-bold mb-4 uppercase tracking-widest text-primary font-display">
+              {t.how_small}
+            </h6>
+            <h2 className="text-3xl md:text-5xl font-bold font-display text-gray-900 mb-4 tracking-tight">
+              {t.how_heading_1} <span className="text-primary">{t.how_heading_2}</span>
+            </h2>
+            <p className="text-sm md:text-base text-gray-600 max-w-md mx-auto leading-relaxed">
+              {t.how_desc}
+            </p>
         </div>
 
         {/* Layout Container */}
@@ -89,7 +90,7 @@ const HowItWorks: React.FC = () => {
                 >
                   {/* Number Badge */}
                   <div
-                    className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shrink-0 font-bold text-lg font-display transition-all duration-300 ${
+                    className={`w-9 h-9   rounded-full flex items-center justify-center shrink-0 font-bold text-lg font-display transition-all duration-300 ${
                       isActive
                         ? "bg-primary text-white shadow-lg shadow-primary/40 ring-4 ring-primary/20"
                         : "bg-gray-200 text-gray-500 group-hover:bg-gray-300"

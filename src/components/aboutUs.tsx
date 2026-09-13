@@ -1,7 +1,9 @@
 import image from "../assets/kabout.jpg";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 const AboutUs: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <section className="py-24 md:py-32 bg-slate-950 text-white font-noto overflow-hidden relative">
       {/* Background Glow Effects */}
@@ -13,27 +15,23 @@ const AboutUs: React.FC = () => {
           {/* Left Column: Text Content */}
           <div className="flex flex-col items-start max-w-2xl">
             <h6 className="inline-flex items-center gap-2 mb-2  text-xs font-medium text-white backdrop-blur-md  font-display uppercase ">
-              About Keyen
+              {t.about_heading_small}
             </h6>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display leading-[1.15] tracking-tight mb-6">
-              Moving the World, <br />
+              {t.about_heading_1} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-                Smarter
+                {t.about_heading_2}
               </span>
             </h2>
 
             <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-10">
-              Keyen is a technology-powered mobility and logistics platform
-              built to simplify the way people, businesses, and communities
-              move. We combine innovation, reliability, and convenience to
-              create seamless transportation experiences that connect people
-              with opportunities, wherever they are.
+              {t.about_desc}
             </p>
 
             <button className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary text-white rounded-xl font-semibold overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)]">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-400 transition-opacity opacity-0 group-hover:opacity-100" />
-              <span className="relative z-10">Discover Our Journey</span>
+              <span className="relative z-10">{t.about_btn}</span>
               <ArrowRight className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
 

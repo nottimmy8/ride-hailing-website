@@ -1,7 +1,10 @@
 import React from "react";
 import phoneImg from "../assets/keyen_phone_mockup.jpg";
+import { useLanguage } from "../context/LanguageContext";
 
 const DownloadApp: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="relative py-24 md:py-48 font-noto bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
@@ -28,10 +31,10 @@ const DownloadApp: React.FC = () => {
           {/* Left Content */}
           <div className="relative z-10 md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left md:py-24">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-white tracking-tight mb-4 leading-[1.1]">
-              Download the free<br />Keyen app
+              {t.download_heading}
             </h2>
             <p className="text-white/90 text-sm md:text-base font-medium mb-10 max-w-md">
-              For faster, easier booking and exclusive deals.
+              {t.download_subtext}
             </p>
 
             {/* Download Buttons */}
@@ -50,10 +53,10 @@ const DownloadApp: React.FC = () => {
                 </svg>
                 <div className="text-left">
                   <p className="text-gray-500 text-[10px] uppercase tracking-wider font-bold">
-                    Download on the
+                    {t.download_on}
                   </p>
                   <p className="text-black font-black font-display text-lg leading-none -mt-0.5">
-                    App Store
+                    {t.app_store}
                   </p>
                 </div>
               </a>
@@ -87,10 +90,10 @@ const DownloadApp: React.FC = () => {
                 </svg>
                 <div className="text-left">
                   <p className="text-gray-500 text-[10px] uppercase tracking-wider font-bold">
-                    Get it on
+                    {t.get_it_on}
                   </p>
                   <p className="text-black font-black font-display text-lg leading-none -mt-0.5">
-                    Google Play
+                    {t.google_play}
                   </p>
                 </div>
               </a>

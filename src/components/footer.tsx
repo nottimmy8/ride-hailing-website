@@ -60,7 +60,10 @@ const socials = [
   },
 ];
 
+import { useLanguage } from "../context/LanguageContext";
+
 const Footer: React.FC = () => {
+  const { t } = useLanguage();
   const [showWaitlist, setShowWaitlist] = useState(false);
 
   return (
@@ -80,17 +83,16 @@ const Footer: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14 md:py-20 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="max-w-xl">
               <h6 className="text-primary font-bold text-xs tracking-[0.3em] uppercase mb-3 font-display">
-                Coming Soon
+                {t.footer_coming_soon}
               </h6>
               <h2 className="text-3xl md:text-5xl font-black font-display tracking-tight leading-[1.1]">
-                Be the First to{" "}
+                {t.footer_cta_heading_1}{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-                  Ride with Keyen
+                  {t.footer_cta_heading_2}
                 </span>
               </h2>
               <p className="text-gray-400 text-base mt-4 leading-relaxed">
-                Join thousands already on the waitlist. We're launching soon —
-                don't miss your spot.
+                {t.footer_cta_sub}
               </p>
             </div>
             <button
@@ -100,7 +102,7 @@ const Footer: React.FC = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity" />
               <span className="relative z-10 flex items-center gap-2">
-                Join the Waitlist
+                {t.footer_join_waitlist}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </button>
@@ -118,8 +120,7 @@ const Footer: React.FC = () => {
                 className="w-28 brightness-0 invert"
               />
               <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-                Technology-powered mobility and logistics built to simplify the
-                way people, businesses, and communities move.
+                {t.footer_tagline}
               </p>
 
               {/* Contact Info */}
@@ -185,19 +186,12 @@ const Footer: React.FC = () => {
           {/* Bottom Bar */}
           <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-gray-600 text-xs text-center sm:text-left">
-              © {new Date().getFullYear()} Keyen Technologies Ltd. All rights
-              reserved.
+              © {new Date().getFullYear()} {t.footer_rights}
             </p>
             <div className="flex items-center gap-6">
-              {["Terms", "Privacy", "Cookies"].map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="text-gray-600 hover:text-gray-300 text-xs transition-colors"
-                >
-                  {item}
-                </a>
-              ))}
+              <a href="#" className="text-gray-600 hover:text-gray-300 text-xs transition-colors">{t.footer_terms}</a>
+              <a href="#" className="text-gray-600 hover:text-gray-300 text-xs transition-colors">{t.footer_privacy}</a>
+              <a href="#" className="text-gray-600 hover:text-gray-300 text-xs transition-colors">{t.footer_cookies}</a>
             </div>
           </div>
         </div>

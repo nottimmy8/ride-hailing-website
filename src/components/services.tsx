@@ -1,17 +1,20 @@
 import data from "../mock/data";
+import { useLanguage } from "../context/LanguageContext";
 
 const Services = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="py-20">
       <div className="max-w-7xl w-full mx-auto px-4 py-1 flex flex-col md:flex-row justify-between gap-10  ">
         {/* text */}
         <div className="">
           <h1 className="text-[30px] md:text-[45px] font-bold leading-[1.1]   mb-6 max-w-[400px] font-display ">
-            Why choose us? <span className="text-primary">Best</span> services{" "}
-            <br /> in the City.
+            {t.services_heading_1} <span className="text-primary">{t.services_heading_accent}</span>{" "}
+            <br /> {t.services_heading_2}
           </h1>
           <button className="bg-[#2563EB] text-white px-5 py-3.5 rounded-md cursor-pointer text-sm font-medium ">
-            Book a Ride
+            {t.services_book_btn}
           </button>
         </div>
         {/* card */}
