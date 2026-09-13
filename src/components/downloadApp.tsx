@@ -1,110 +1,70 @@
-import bgImg from "../assets/download_app_bg.jpg";
-import phoneImg from "../assets/phone_mockup_app.jpg";
-
-const leftFeatures = [
-  {
-    id: "01",
-    title: "Fast Booking",
-    description:
-      "Request a ride in seconds. Our smart matching connects you with the nearest driver instantly, no waiting around.",
-  },
-  {
-    id: "02",
-    title: "Easy to Use",
-    description:
-      "A clean, intuitive interface designed for everyone. Set your pickup, choose your ride, and you're on your way.",
-  },
-];
-
-const rightFeatures = [
-  {
-    id: "03",
-    title: "GPS Tracking",
-    description:
-      "Track your ride in real-time from pickup to destination. Share your live location with family for extra peace of mind.",
-  },
-  {
-    id: "04",
-    title: "Rewarding Rides",
-    description:
-      "Earn points with every trip. Redeem rewards for discounts, free rides, and exclusive Keyen perks.",
-  },
-];
+import React from "react";
+import phoneImg from "../assets/keyen_phone_mockup.jpg";
 
 const DownloadApp: React.FC = () => {
   return (
-    <section className="relative py-24 md:py-36 font-noto overflow-hidden">
-      {/* Cinematic Background */}
-      <div className="absolute inset-0">
-        <img
-          src={bgImg}
-          alt="Night city background"
-          className="w-full h-full object-cover"
-        />
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-slate-950/85" />
-        {/* Subtle blue glow from bottom-center */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/20 rounded-full blur-[120px] pointer-events-none" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <h6 className="text-primary font-bold text-xs tracking-[0.3em] uppercase mb-3 font-display">
-            Get More Benefits
-          </h6>
-          <h2 className="text-4xl md:text-6xl font-black font-display text-white uppercase tracking-tight">
-            Download the App
-          </h2>
-        </div>
-
-        {/* Three-Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-12 lg:gap-8 items-center">
-          {/* Left Features */}
-          <div className="flex flex-col gap-12 lg:gap-16">
-            {leftFeatures.map((feature) => (
-              <div key={feature.id} className="flex items-start gap-5 group">
-                {/* Number Badge */}
-                <div className="shrink-0 w-12 h-12 rounded-full border-2 border-primary/50 bg-primary/10 flex items-center justify-center transition-all duration-300 group-hover:bg-primary group-hover:border-primary group-hover:scale-110">
-                  <span className="text-sm font-black font-display text-primary group-hover:text-white transition-colors">
-                    {feature.id}
-                  </span>
-                </div>
-                <div className="lg:text-left">
-                  <h4 className="text-white font-bold font-display uppercase tracking-wide mb-2 text-base md:text-lg">
-                    {feature.title}
-                  </h4>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    {feature.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+    <section className="relative py-24 md:py-48 font-noto bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
+        <div className="relative bg-primary rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between px-8 md:px-20 py-16 md:py-0 min-h-[420px] shadow-2xl">
+          
+          {/* Subtle background pattern/overlay for the banner */}
+          <div className="absolute inset-0 overflow-hidden rounded-[2.5rem]">
+             <div className="absolute -left-10 -bottom-10 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+             <div className="absolute right-1/3 -top-20 w-80 h-80 bg-black/10 rounded-full blur-3xl pointer-events-none"></div>
+             <div className="absolute left-10 bottom-10 grid grid-cols-5 gap-3 opacity-20 pointer-events-none">
+                {/* Dots pattern like in inspiration */}
+                {[...Array(25)].map((_, i) => (
+                  <div key={i} className="w-1.5 h-4 rounded-full bg-white rotate-12"></div>
+                ))}
+             </div>
+             {/* Diagonal Tire Track Pattern */}
+             <div className="absolute inset-0 opacity-[0.03] pointer-events-none transform -skew-x-12 scale-150 flex flex-col justify-center gap-8">
+               {[...Array(5)].map((_, i) => (
+                  <div key={`track-${i}`} className="w-full h-12 border-y-4 border-white border-dashed"></div>
+               ))}
+             </div>
           </div>
 
-          {/* Center: Phone Mockup */}
-          <div className="flex flex-col items-center justify-center order-first lg:order-none">
-            <div className="relative w-[240px] md:w-[280px]">
-              {/* Glow behind phone */}
-              <div className="absolute inset-0 bg-primary/30 rounded-[3rem] blur-3xl scale-75 -z-10" />
-              <img
-                src={phoneImg}
-                alt="Keyen App Mockup"
-                className="w-full drop-shadow-2xl"
-                style={{ mixBlendMode: "lighten" }}
-              />
-            </div>
+          {/* Left Content */}
+          <div className="relative z-10 md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left md:py-24">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-white tracking-tight mb-4 leading-[1.1]">
+              Download the free<br />Keyen app
+            </h2>
+            <p className="text-white/90 text-sm md:text-base font-medium mb-10 max-w-md">
+              For faster, easier booking and exclusive deals.
+            </p>
 
             {/* Download Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mt-6">
+            <div className="flex flex-col sm:flex-row gap-4">
+              {/* App Store */}
+              <a
+                href="#"
+                className="flex items-center gap-3 px-6 py-3.5 bg-white text-black hover:bg-gray-50 rounded-xl transition-all duration-300 shadow-xl hover:-translate-y-1"
+              >
+                <svg
+                  className="w-8 h-8 shrink-0 text-black"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                <div className="text-left">
+                  <p className="text-gray-500 text-[10px] uppercase tracking-wider font-bold">
+                    Download on the
+                  </p>
+                  <p className="text-black font-black font-display text-lg leading-none -mt-0.5">
+                    App Store
+                  </p>
+                </div>
+              </a>
+
               {/* Google Play */}
               <a
                 href="#"
-                className="group flex items-center gap-3 px-5 py-3 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-primary/50 rounded-xl transition-all duration-300 backdrop-blur-sm"
+                className="flex items-center gap-3 px-6 py-3.5 bg-white text-black hover:bg-gray-50 rounded-xl transition-all duration-300 shadow-xl hover:-translate-y-1"
               >
                 <svg
-                  className="w-7 h-7 shrink-0"
+                  className="w-8 h-8 shrink-0"
                   viewBox="0 0 24 24"
                   fill="none"
                 >
@@ -125,64 +85,27 @@ const DownloadApp: React.FC = () => {
                     fill="#34A853"
                   />
                 </svg>
-                <div>
-                  <p className="text-gray-400 text-[10px] uppercase tracking-wider">
+                <div className="text-left">
+                  <p className="text-gray-500 text-[10px] uppercase tracking-wider font-bold">
                     Get it on
                   </p>
-                  <p className="text-white font-bold font-display text-sm">
+                  <p className="text-black font-black font-display text-lg leading-none -mt-0.5">
                     Google Play
-                  </p>
-                </div>
-              </a>
-
-              {/* App Store */}
-              <a
-                href="#"
-                className="group flex items-center gap-3 px-5 py-3 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-primary/50 rounded-xl transition-all duration-300 backdrop-blur-sm"
-              >
-                <svg
-                  className="w-7 h-7 shrink-0 text-white"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                </svg>
-                <div>
-                  <p className="text-gray-400 text-[10px] uppercase tracking-wider">
-                    Download on the
-                  </p>
-                  <p className="text-white font-bold font-display text-sm">
-                    App Store
                   </p>
                 </div>
               </a>
             </div>
           </div>
 
-          {/* Right Features */}
-          <div className="flex flex-col gap-12 lg:gap-16">
-            {rightFeatures.map((feature) => (
-              <div
-                key={feature.id}
-                className="flex items-start gap-5 group lg:flex-row-reverse"
-              >
-                {/* Number Badge */}
-                <div className="shrink-0 w-12 h-12 rounded-full border-2 border-primary/50 bg-primary/10 flex items-center justify-center transition-all duration-300 group-hover:bg-primary group-hover:border-primary group-hover:scale-110">
-                  <span className="text-sm font-black font-display text-primary group-hover:text-white transition-colors">
-                    {feature.id}
-                  </span>
-                </div>
-                <div className="lg:text-right">
-                  <h4 className="text-white font-bold font-display uppercase tracking-wide mb-2 text-base md:text-lg">
-                    {feature.title}
-                  </h4>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    {feature.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+          {/* Right Image */}
+          <div className="relative md:absolute md:-right-8 lg:right-12 bottom-0 w-full md:w-auto flex justify-center mt-12 md:mt-0 z-20 h-full items-end md:items-center">
+            <img
+              src={phoneImg}
+              alt="Keyen App Mockup"
+              className="w-[280px] md:w-[320px] lg:w-[360px] drop-shadow-[0_30px_30px_rgba(0,0,0,0.3)] md:scale-110 lg:scale-125 md:origin-bottom lg:origin-center md:translate-y-8"
+            />
           </div>
+
         </div>
       </div>
     </section>
