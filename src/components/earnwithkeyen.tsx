@@ -45,15 +45,15 @@ const earnData = [
 
 const EarnWithKeyen: React.FC = () => {
   return (
-    <section className="bg-white font-noto overflow-hidden py-20   relative">
+    <section className="bg-white font-noto overflow-hidden py-16 md:py-20 relative mb-12 md:mb-16 z-10">
       {/* Overall Header */}
-      <div className="text-center mb-16 md:mb-24 px-4">
+      <div className="text-center mb-16 md:mb-20 px-4">
         <h2 className="text-4xl md:text-5xl font-black font-display text-gray-900 tracking-tight uppercase">
           Earn money with <span className="text-primary">Keyen</span>
         </h2>
       </div>
 
-      <div className="flex flex-col gap-24 md:gap-40 max-w-7xl mx-auto">
+      <div className="flex flex-col gap-20 md:gap-32 max-w-7xl mx-auto px-4">
         {earnData.map((item) => (
           <div
             key={item.id}
@@ -94,31 +94,19 @@ const EarnWithKeyen: React.FC = () => {
               </button>
             </div>
 
-            {/* Image Side - Spilling off edge */}
-            <div className="flex-1 relative w-full h-[260px] md:h-[500px]">
-              {/* Using mix-blend-multiply to remove the white background of the generated images, leaving only the vehicle perfectly integrated. */}
+            {/* Image Side */}
+            <div className="flex-1 relative w-full h-[260px] md:h-[450px]">
               <img
                 src={item.image}
                 alt={item.title}
-                className={`absolute top-1/2 -translate-y-1/2 w-[150%] max-w-none object-contain mix-blend-multiply 
-                  ${item.reverse ? "right-0 md:right-auto md:-left-[20%]" : "left-0 md:left-auto md:-right-[20%]"}
+                className={`absolute top-1/2 -translate-y-1/2 w-[140%] max-w-none object-contain mix-blend-multiply 
+                  ${item.reverse ? "right-0 md:right-auto md:-left-[15%]" : "left-0 md:left-auto md:-right-[15%]"}
                 `}
               />
             </div>
           </div>
         ))}
       </div>
-
-      {/* Decorative Bottom Checkerboard */}
-      {/* <div
-        className="w-full h-4 mt-32 opacity-20"
-        style={{
-          backgroundImage:
-            "linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000), linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000)",
-          backgroundSize: "12px 12px",
-          backgroundPosition: "0 0, 6px 6px",
-        }}
-      /> */}
     </section>
   );
 };

@@ -1,36 +1,40 @@
 import React from "react";
-import phoneImg from "../assets/keyen_phone_mockup.jpg";
 import { useLanguage } from "../context/LanguageContext";
 
 const DownloadApp: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="relative py-24 md:py-48 font-noto bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
-        <div className="relative bg-primary rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between px-8 md:px-20 py-16 md:py-0 min-h-[420px] shadow-2xl">
-          
+    <section className="   font-noto overflow-hidden">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 ">
+        <div className=" bg-primary rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between px-8 md:px-20 py-10 md:py-0 h-[400px] shadow-2xl">
           {/* Subtle background pattern/overlay for the banner */}
           <div className="absolute inset-0 overflow-hidden rounded-[2.5rem]">
-             <div className="absolute -left-10 -bottom-10 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
-             <div className="absolute right-1/3 -top-20 w-80 h-80 bg-black/10 rounded-full blur-3xl pointer-events-none"></div>
-             <div className="absolute left-10 bottom-10 grid grid-cols-5 gap-3 opacity-20 pointer-events-none">
-                {/* Dots pattern like in inspiration */}
-                {[...Array(25)].map((_, i) => (
-                  <div key={i} className="w-1.5 h-4 rounded-full bg-white rotate-12"></div>
-                ))}
-             </div>
-             {/* Diagonal Tire Track Pattern */}
-             <div className="absolute inset-0 opacity-[0.03] pointer-events-none transform -skew-x-12 scale-150 flex flex-col justify-center gap-8">
-               {[...Array(5)].map((_, i) => (
-                  <div key={`track-${i}`} className="w-full h-12 border-y-4 border-white border-dashed"></div>
-               ))}
-             </div>
+            <div className="absolute -left-10 -bottom-10 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="absolute right-1/3 -top-20 w-80 h-80 bg-black/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="absolute left-10 bottom-10 grid grid-cols-5 gap-3 opacity-20 pointer-events-none">
+              {/* Dots pattern like in inspiration */}
+              {[...Array(25)].map((_, i) => (
+                <div
+                  key={i}
+                  className="w-1.5 h-4 rounded-full bg-white rotate-12"
+                ></div>
+              ))}
+            </div>
+            {/* Diagonal Tire Track Pattern */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none transform -skew-x-12 scale-150 flex flex-col justify-center gap-8">
+              {[...Array(5)].map((_, i) => (
+                <div
+                  key={`track-${i}`}
+                  className="w-full h-12 border-y-4 border-white border-dashed"
+                ></div>
+              ))}
+            </div>
           </div>
 
           {/* Left Content */}
-          <div className="relative z-10 md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left md:py-24">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-white tracking-tight mb-4 leading-[1.1]">
+          <div className="relative z-10  flex flex-col items-center md:items-start text-center md:text-left md:py-24">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl md:w-[450px] font-black font-display text-white tracking-tight mb-4 leading-[1.1]">
               {t.download_heading}
             </h2>
             <p className="text-white/90 text-sm md:text-base font-medium mb-10 max-w-md">
@@ -99,16 +103,6 @@ const DownloadApp: React.FC = () => {
               </a>
             </div>
           </div>
-
-          {/* Right Image */}
-          <div className="relative md:absolute md:-right-8 lg:right-12 bottom-0 w-full md:w-auto flex justify-center mt-12 md:mt-0 z-20 h-full items-end md:items-center">
-            <img
-              src={phoneImg}
-              alt="Keyen App Mockup"
-              className="w-[280px] md:w-[320px] lg:w-[360px] drop-shadow-[0_30px_30px_rgba(0,0,0,0.3)] md:scale-110 lg:scale-125 md:origin-bottom lg:origin-center md:translate-y-8"
-            />
-          </div>
-
         </div>
       </div>
     </section>
