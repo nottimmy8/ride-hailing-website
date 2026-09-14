@@ -53,11 +53,11 @@ const EarnWithKeyen: React.FC = () => {
         </h2>
       </div>
 
-      <div className="flex flex-col gap-20 md:gap-32 max-w-7xl mx-auto px-4">
+      <div className="flex flex-col gap-20 md:gap-32 max-w-7xl mx-auto px-4 justify-between">
         {earnData.map((item) => (
           <div
             key={item.id}
-            className={`flex flex-col md:flex-row items-center gap-12 lg:gap-0 ${item.reverse ? "md:flex-row-reverse" : ""}`}
+            className={`flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-0 ${item.reverse ? "md:flex-row-reverse" : ""}`}
           >
             {/* Text Content */}
             <div
