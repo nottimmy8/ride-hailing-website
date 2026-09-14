@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
         <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[2.2fr_1fr_1fr_1fr] gap-8 pt-7 text-xs leading-[1.6]">
           {/* Description */}
           <div className="max-w-[235px] text-white/50">
-            <p>
+            <p className="text-xs ">
               Your smarter, safer, and fairer way to move. We're building a new
               kind of ride experience where drivers and riders are treated with
               respect.
@@ -41,16 +41,16 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="mb-2 font-medium text-white/80">Navigation</h3>
             <div className="space-y-1.5 text-white/50">
-              <p className="hover:text-white cursor-pointer transition-colors">
+              <p className="hover:text-white text-xs cursor-pointer transition-colors">
                 Ride
               </p>
-              <p className="hover:text-white cursor-pointer transition-colors">
+              <p className="hover:text-white text-xs cursor-pointer transition-colors">
                 Drive
               </p>
-              <p className="hover:text-white cursor-pointer transition-colors">
+              <p className="hover:text-white text-xs cursor-pointer transition-colors">
                 Earn
               </p>
-              <p className="hover:text-white cursor-pointer transition-colors">
+              <p className="hover:text-white text-xs cursor-pointer transition-colors">
                 Company
               </p>
             </div>
