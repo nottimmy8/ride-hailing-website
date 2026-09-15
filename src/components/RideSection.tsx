@@ -10,7 +10,6 @@ import {
   CreditCard,
   ArrowRight,
   Sparkles,
-  Star,
   CheckCircle2,
   Smartphone,
   ChevronRight,
@@ -424,48 +423,45 @@ export const RideSection = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-3xl sm:text-4xl font-black text-white">
-            Moving with Keyen is simple
+            HOW IT WORKS
           </h2>
           <p className="text-slate-400 text-sm sm:text-base mt-2">
-            Book your ride in 3 quick steps from any mobile device.
+            Your journey starts in three simple steps.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
           <div className="flex flex-col items-center text-center p-6 bg-slate-900/30 rounded-2xl border border-slate-800/50">
             <div className="w-12 h-12 rounded-full bg-blue-600/20 text-blue-400 border border-blue-500/30 font-black flex items-center justify-center text-lg mb-4">
-              1
+              01
             </div>
             <h4 className="text-lg font-bold text-white mb-2">
-              Request Your Ride
+              Request
             </h4>
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-              Open the Keyen app, enter your destination, and pick from
-              On-Demand, Reserve, or Intercity options.
+              Tell us where you're headed and see your fare upfront — no surprises later.
             </p>
           </div>
 
           <div className="flex flex-col items-center text-center p-6 bg-slate-900/30 rounded-2xl border border-slate-800/50">
             <div className="w-12 h-12 rounded-full bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 font-black flex items-center justify-center text-lg mb-4">
-              2
+              02
             </div>
             <h4 className="text-lg font-bold text-white mb-2">
-              Get Matched Instantly
+              Connect
             </h4>
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-              Our intelligent dispatch engine connects you to the closest
-              verified partner within seconds.
+              Get matched with a verified driver and see the information you need to know before you get in.
             </p>
           </div>
 
           <div className="flex flex-col items-center text-center p-6 bg-slate-900/30 rounded-2xl border border-slate-800/50">
             <div className="w-12 h-12 rounded-full bg-purple-600/20 text-purple-400 border border-purple-500/30 font-black flex items-center justify-center text-lg mb-4">
-              3
+              03
             </div>
-            <h4 className="text-lg font-bold text-white mb-2">Track & Enjoy</h4>
+            <h4 className="text-lg font-bold text-white mb-2">Move</h4>
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-              Follow your trip on the live GPS map, enjoy climate-controlled
-              comfort, and pay seamlessly upon arrival.
+              Ride safely to your destination, tracked from start to finish.
             </p>
           </div>
         </div>

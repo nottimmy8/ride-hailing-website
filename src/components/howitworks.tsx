@@ -96,7 +96,7 @@ const HowItWorks: React.FC = () => {
                         : "bg-gray-200 text-gray-500 group-hover:bg-gray-300"
                     }`}
                   >
-                    0{step.id}.
+                    0{step.id}
                   </div>
 
                   {/* Content */}

@@ -24,11 +24,11 @@ const Hero = () => {
         <h6 className="text-[10px] font-medium font-display mb-4 text-primary    px-4 py-1 tracking-widest uppercase">
           {t.hero_launching}
         </h6>
-        <h1 className="text-4xl md:text-[64px] font-bold leading-[1.1] font-display   mb-6">
+        <h1 className="text-4xl md:text-[64px] lg:text-[84px] font-bold leading-[1.1] font-display   mb-4">
           {t.hero_headline_1} <br /> {t.hero_headline_2}{" "}
           <span className="text-primary">{t.hero_headline_accent}</span>
         </h1>
-        <p className="text-xs md:text-sm font-medium  mb-8 max-w-[450px] leading-relaxed">
+        <p className="text-xs md:text-sm font-medium  mb-8 max-w-[550px] leading-relaxed">
           {t.hero_subtext}
         </p>
 

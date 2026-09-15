@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/navbar";
@@ -10,12 +9,17 @@ import EarnWithKeyen from "./components/earnwithkeyen";
 import Footer from "./components/footer";
 import DownloadApp from "./components/downloadApp";
 import RideSection from "./components/RideSection";
+import WhyChooseUs from "./components/WhyChooseUs";
+import Gradient from "./components/gradient";
 
 // Landing Page Group
 const Home = () => (
   <>
     <Hero />
+    {/* <Launch /> */}
     <Services />
+    <WhyChooseUs />
+    <Gradient />
     <HowItWorks />
     <AboutUs />
     <EarnWithKeyen />

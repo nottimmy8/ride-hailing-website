@@ -14,3 +14,8 @@ body {
   --font-noto: "Noto Sans", sans-serif;
   --font-display: "Bricolage Grotesque", sans-serif;
 }
+
+/* Hide scrollbar for service slider */
+.overflow-x-auto::-webkit-scrollbar {
+  display: none;
+}

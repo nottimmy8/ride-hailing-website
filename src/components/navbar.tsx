@@ -142,10 +142,10 @@ const Navbar = () => {
     <div className="relative">
       <button
         onClick={() => setShowLangMenu(!showLangMenu)}
-        className={`flex items-center gap-1.5 font-semibold cursor-pointer hover:bg-gray-200 transition-colors ${
+        className={`flex items-center gap-1.5 font-semibold cursor-pointer hover:font-bold transition-colors ${
           mobile
-            ? "bg-gray-100 px-3 py-2 rounded-lg text-sm w-full justify-between"
-            : "bg-gray-100 px-3 py-2 rounded-md text-xs"
+            ? "   rounded-lg text-sm w-full justify-between"
+            : " rounded-md text-xs"
         }`}
       >
         <div className="flex items-center gap-1.5">
@@ -219,15 +219,19 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <div className="flex items-center gap-3 sm:gap-6">
+          <div className="flex items-center gap-3 sm:gap-6 ">
             <div className="hidden sm:block">
               <LanguageSelector />
             </div>
+            <div className="font-medium  cursor-pointer     text-sm  ">
+              support
+            </div>
+
             <button className="hidden sm:block bg-primary text-white px-5 py-2 rounded-md cursor-pointer text-sm font-medium hover:bg-blue-700 transition-colors">
               {t.nav_join_waitlist}
             </button>
             <button
-              className="cursor-pointer p-1 rounded-md hover:bg-gray-100 transition-colors"
+              className="hidden cursor-pointer p-1 rounded-md hover:bg-gray-100 transition-colors"
               onClick={() => {
                 setIsOpen(!IsOpen);
                 setShowLangMenu(false);
