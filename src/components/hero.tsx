@@ -32,7 +32,7 @@ const Hero = () => {
           {t.hero_subtext}
         </p>
 
-        <div className=" flex flex-col md:flex-row items-center gap-4  ">
+        <div className=" flex  flex-row items-center gap-4  ">
           <button className="bg-[#2563EB] text-white px-5 py-3.5 rounded-md cursor-pointer text-sm font-medium ">
             {t.hero_drive_btn}
           </button>

@@ -1,5 +1,4 @@
 import image from "../assets/kabout.jpg";
-import { ArrowRight } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 
 const AboutUs: React.FC = () => {
@@ -18,22 +17,22 @@ const AboutUs: React.FC = () => {
               {t.about_heading_small}
             </h6>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display leading-[1.15] tracking-tight mb-6">
+            <h2 className="text-4xl md:text-5xl  font-bold font-display leading-[1.15] tracking-tight mb-6">
               {t.about_heading_1} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
                 {t.about_heading_2}
               </span>
             </h2>
 
-            <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-10">
+            <p className="text-xs md:text-sm text-gray-400 leading-relaxed mb-10">
               {t.about_desc}
             </p>
 
-            <button className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary text-white rounded-xl font-semibold overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)]">
+            {/* <button className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary text-white rounded-xl font-semibold overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)]">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-400 transition-opacity opacity-0 group-hover:opacity-100" />
               <span className="relative z-10">{t.about_btn}</span>
               <ArrowRight className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
+            </button> */}
 
             {/* Quick Stats below CTA */}
             {/* <div className="flex items-center gap-8 mt-12 pt-12 border-t border-white/10 w-full">
@@ -58,7 +57,7 @@ const AboutUs: React.FC = () => {
           </div>
 
           {/* Right Column: Visual Showcase */}
-          <div className="relative w-full h-[500px] lg:h-[600px] rounded-3xl overflow-hidden group">
+          <div className="relative w-full h-[400px]  rounded-3xl overflow-hidden group">
             {/* Main Image */}
             <div className="absolute inset-0   rounded-3xl overflow-hidden ">
               <img

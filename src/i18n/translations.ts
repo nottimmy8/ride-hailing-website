@@ -259,16 +259,15 @@ export const translations: Record<LangCode, Translations> = {
     footer_privacy: "Privacy",
     footer_cookies: "Cookies",
     about_heading_small: "About Keyen",
-    about_heading_1: "Moving the World,",
-    about_heading_2: "Smarter",
+    about_heading_1: "We're building mobility ",
+    about_heading_2: " people can trust.",
     about_desc:
-      "Keyen is a technology-powered mobility and logistics platform built to simplify the way people, businesses, and communities move. We combine innovation, reliability, and convenience to create seamless transportation experiences that connect people with opportunities, wherever they are.",
+      "Keyen is a technology and mobility company creating a better way for people to move around their cities. We connect riders and drivers through a platform designed around something simple: you should know who you’re riding with, and everyone involved should be accountable for the experience. From verified users and transparent payments to reliable support and thoughtful driver solutions, we’re building the infrastructure for mobility that feels more human, more predictable and more trustworthy.",
     about_btn: "Discover Our Journey",
     how_small: "Seamless Mobility",
     how_heading_1: "How It",
     how_heading_2: "Works",
-    how_desc:
-      "Your journey starts in three simple steps.",
+    how_desc: "Your journey starts in three simple steps.",
     how_step1_title: "Request",
     how_step1_desc:
       "Tell us where you're headed and see your fare upfront — no surprises later.",
@@ -882,8 +881,7 @@ export const translations: Record<LangCode, Translations> = {
     service_delivery_desc:
       "Wò nuɖuɖu kple nusiwo nèlɔ̃, wotsɔ wɔ kpɔ́kpɔ́ va wò xɔme.",
     service_carsharing_title: "Xe Mama",
-    service_carsharing_desc:
-      "Ma xe, ma xexlẽ. Mɔ̃ nyui be na zɔ ɖeka.",
+    service_carsharing_desc: "Ma xe, ma xexlẽ. Mɔ̃ nyui be na zɔ ɖeka.",
     service_carrent_title: "Xe Yaya",
     service_carrent_desc:
       "Ya xe dɔ gaƒoƒo alo ŋkeke geɖe. Nyo, xexlẽ me le me o, eye wahala me le eme o.",
@@ -1004,8 +1002,7 @@ export const translations: Record<LangCode, Translations> = {
     service_rides_desc:
       "Byɔ ɖò minute kpèɖé mɛ, yì ɖò minute kpèɖé mɛ. Fiɖé ganji e è mɔ wɛnɖagbe tɔn é.",
     service_delivery_title: "Fɛ́nfɛ́n",
-    service_delivery_desc:
-      "Nǔ e jló we lɛ, è sɛ́ dó we kpɔ́n kpɔ́n.",
+    service_delivery_desc: "Nǔ e jló we lɛ, è sɛ́ dó we kpɔ́n kpɔ́n.",
     service_carsharing_title: "Gbɛsɛ Mama",
     service_carsharing_desc:
       "Ma fiɖé, ma akwɛ. Alɔ e nyo hugàn bo na yì kpɔ́ é.",
