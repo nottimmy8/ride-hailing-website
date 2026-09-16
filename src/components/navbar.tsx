@@ -2,7 +2,7 @@ import { Globe, ArrowRight, ChevronDown, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import logo from "../assets/keyenlogo.png";
+import logo from "../assets/Klogo.png";
 import menu from "../assets/jam_menu.svg";
 import cancle from "../assets/cancle.svg";
 import { useLanguage } from "../context/LanguageContext";
@@ -212,7 +212,7 @@ const Navbar = () => {
     <>
       <div className="w-full h-[70px] bg-white z-[60] relative">
         <div className="max-w-7xl w-full mx-auto px-4 py-1 h-full flex items-center justify-between">
-          <div className="w-23">
+          <div className="w-[120px]">
             {/* 2. Changed logo home link to Link */}
             <Link to="/">
               <img src={logo} alt="Keyen" className="w-full object-cover" />
@@ -227,7 +227,17 @@ const Navbar = () => {
               support
             </div>
 
-            <button className="hidden sm:block bg-primary text-white px-5 py-2 rounded-md cursor-pointer text-sm font-medium hover:bg-blue-700 transition-colors">
+            <button
+              onClick={() => {
+                const waitlistElem = document.getElementById("waitlist");
+                if (waitlistElem) {
+                  waitlistElem.scrollIntoView({ behavior: "smooth" });
+                } else {
+                  window.location.href = "/#waitlist";
+                }
+              }}
+              className="hidden sm:block bg-primary text-white px-5 py-2 rounded-md cursor-pointer text-sm font-medium hover:bg-blue-700 transition-colors"
+            >
               {t.nav_join_waitlist}
             </button>
             <button

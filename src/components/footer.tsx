@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Footer information */}
-        <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[2.2fr_1fr_1fr_1fr] gap-8 pt-7 text-xs leading-[1.6]">
+        <div className="relative flex items-center justify-between gap-8 pt-7 text-xs leading-[1.6]">
           {/* Description */}
           <div className="max-w-[235px] text-white/50">
             <p className="text-xs ">
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Links */}
-          <div>
+          {/* <div>
             <h3 className="mb-2 font-medium text-white/80">Navigation</h3>
             <div className="space-y-1.5 text-white/50">
               <p className="hover:text-white text-xs cursor-pointer transition-colors">
@@ -54,16 +54,16 @@ const Footer: React.FC = () => {
                 Company
               </p>
             </div>
-          </div>
+          </div> */}
 
           {/* Call us */}
-          <div>
+          {/* <div>
             <h3 className="mb-2 font-medium text-white/80">Call us on</h3>
             <div className="space-y-1.5 text-white/50">
               <p>+234 812 345 6789</p>
               <p>+234 803 456 7890</p>
             </div>
-          </div>
+          </div> */}
 
           {/* Questions */}
           <div>

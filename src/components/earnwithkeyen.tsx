@@ -125,7 +125,10 @@ const earnData: EarningSection[] = [
 
 const EarnWithKeyen: React.FC = () => {
   return (
-    <section className="bg-white font-noto overflow-hidden py-12 sm:py-16 md:py-20 relative mb-8 sm:mb-12 md:mb-16 z-10">
+    <section
+      id="earn"
+      className="bg-white font-noto overflow-hidden py-12 sm:py-16 md:py-20 relative mb-8 sm:mb-12 md:mb-16 z-10"
+    >
       {/* Overall Header */}
       <div className="text-center mb-12 sm:mb-16 md:mb-20 px-4">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-gray-900 tracking-tight uppercase">
@@ -231,7 +234,14 @@ const EarnWithKeyen: React.FC = () => {
               )}
 
               {/* CTA */}
-              <button className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 bg-primary text-white rounded-xl font-semibold overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)]">
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("waitlist")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 bg-primary text-white rounded-xl font-semibold overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] cursor-pointer"
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-400 transition-opacity opacity-0 group-hover:opacity-100" />
                 <span className="relative z-10 font-display uppercase tracking-wide text-xs sm:text-sm">
                   {item.cta}

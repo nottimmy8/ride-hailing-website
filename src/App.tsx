@@ -6,6 +6,7 @@ import Services from "./components/services";
 import HowItWorks from "./components/howitworks";
 import AboutUs from "./components/aboutUs";
 import EarnWithKeyen from "./components/earnwithkeyen";
+import Waitlist from "./components/waitlist";
 import Footer from "./components/footer";
 import DownloadApp from "./components/downloadApp";
 import RideSection from "./components/RideSection";
@@ -23,6 +24,7 @@ const Home = () => (
     <HowItWorks />
     <AboutUs />
     <EarnWithKeyen />
+    <Waitlist />
   </>
 );
 

@@ -57,19 +57,20 @@ const HowItWorks: React.FC = () => {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white via-primary/5 to-white font-noto overflow-hidden relative">
+    <section className="py-24  bg-gradient-to-b from-primary/10 via-primary/5 to-primary/10 font-noto overflow-hidden relative">
       <div className="max-w-6xl w-full mx-auto px-4 sm:px-6">
         {/* Header Description / Title */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-            <h6 className="text-[10px] font-bold mb-4 uppercase tracking-widest text-primary font-display">
-              {t.how_small}
-            </h6>
-            <h2 className="text-3xl md:text-5xl font-bold font-display text-gray-900 mb-4 tracking-tight">
-              {t.how_heading_1} <span className="text-primary">{t.how_heading_2}</span>
-            </h2>
-            <p className="text-sm md:text-base text-gray-600 max-w-md mx-auto leading-relaxed">
-              {t.how_desc}
-            </p>
+          <h6 className="text-[10px] font-bold mb-4 uppercase tracking-widest text-primary font-display">
+            {t.how_small}
+          </h6>
+          <h2 className="text-3xl md:text-5xl font-bold font-display text-gray-900 mb-4 tracking-tight">
+            {t.how_heading_1}{" "}
+            <span className="text-primary">{t.how_heading_2}</span>
+          </h2>
+          <p className="text-sm md:text-base text-gray-600 max-w-md mx-auto leading-relaxed">
+            {t.how_desc}
+          </p>
         </div>
 
         {/* Layout Container */}

@@ -33,10 +33,30 @@ const Hero = () => {
         </p>
 
         <div className=" flex  flex-row items-center gap-4  ">
-          <button className="bg-[#2563EB] text-white px-5 py-3.5 rounded-md cursor-pointer text-sm font-medium ">
+          <button
+            onClick={() => {
+              const waitlistElem = document.getElementById("waitlist");
+              if (waitlistElem) {
+                waitlistElem.scrollIntoView({ behavior: "smooth" });
+              } else {
+                window.location.href = "/#waitlist";
+              }
+            }}
+            className="bg-[#2563EB] text-white px-5 py-3.5 rounded-md cursor-pointer text-sm font-medium "
+          >
             {t.hero_drive_btn}
           </button>
-          <button className="border border-[#2563EB] text-white px-5 py-3.5 rounded-md cursor-pointer text-sm font-medium ">
+          <button
+            onClick={() => {
+              const earnElem = document.getElementById("earn");
+              if (earnElem) {
+                earnElem.scrollIntoView({ behavior: "smooth" });
+              } else {
+                window.location.href = "/#earn";
+              }
+            }}
+            className="border border-[#2563EB] text-white px-5 py-3.5 rounded-md cursor-pointer text-sm font-medium "
+          >
             {t.hero_ride_btn}
           </button>
         </div>
