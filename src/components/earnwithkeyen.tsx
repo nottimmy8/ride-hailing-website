@@ -1,5 +1,7 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { Check } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 import driverImg from "../assets/keyen1.png";
 import courierImg from "../assets/keyen2.png";
@@ -124,17 +126,24 @@ const earnData: EarningSection[] = [
 ];
 
 const EarnWithKeyen: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <section
       id="earn"
       className="bg-white font-noto overflow-hidden py-12 sm:py-16 md:py-20 relative mb-8 sm:mb-12 md:mb-16 z-10"
     >
       {/* Overall Header */}
-      <div className="text-center mb-12 sm:mb-16 md:mb-20 px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="text-center mb-12 sm:mb-16 md:mb-20 px-4"
+      >
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-gray-900 tracking-tight uppercase">
-          Earn money with <span className="text-primary">Keyen</span>
+          {t.earn_heading_1} <span className="text-primary">{t.earn_heading_2}</span>
         </h2>
-      </div>
+      </motion.div>
 
       <div className="flex flex-col gap-16 sm:gap-24 md:gap-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 justify-between">
         {earnData.map((item) => (
@@ -145,7 +154,11 @@ const EarnWithKeyen: React.FC = () => {
             }`}
           >
             {/* Text Content */}
-            <div
+            <motion.div
+              initial={{ opacity: 0, x: item.reverse ? 40 : -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className={`flex-1 w-full px-0 sm:px-2 md:px-8 lg:px-16 z-10 ${
                 item.reverse ? "md:text-left" : ""
               }`}
@@ -174,8 +187,16 @@ const EarnWithKeyen: React.FC = () => {
               )}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-5 sm:mb-6 max-w-xl">
                 {item.cards.map((card, idx) => (
-                  <div
+                  <motion.div
                     key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.4,
+                      delay: idx * 0.1,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
                     className="p-4 sm:p-5 rounded-2xl border border-gray-200/80 bg-gray-50/60 hover:bg-white hover:border-primary/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
                   >
                     <div>
@@ -221,7 +242,7 @@ const EarnWithKeyen: React.FC = () => {
                         {card.tagline}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
@@ -247,10 +268,24 @@ const EarnWithKeyen: React.FC = () => {
                   {item.cta}
                 </span>
               </button>
-            </div>
+            </motion.div>
 
             {/* Image Side */}
-            <div className="flex-1 relative w-full h-[220px] sm:h-[280px] md:h-[450px] flex items-center justify-center">
+            <motion.div
+              initial={{
+                opacity: 0,
+                x: item.reverse ? -40 : 40,
+                scale: 0.95,
+              }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{
+                duration: 0.7,
+                delay: 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="flex-1 relative w-full h-[220px] sm:h-[280px] md:h-[450px] flex items-center justify-center"
+            >
               <img
                 src={item.image}
                 alt={item.title}
@@ -263,7 +298,7 @@ const EarnWithKeyen: React.FC = () => {
                   }
                 `}
               />
-            </div>
+            </motion.div>
           </div>
         ))}
       </div>

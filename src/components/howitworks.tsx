@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import {
   MapPin,
   Users,
@@ -57,10 +58,16 @@ const HowItWorks: React.FC = () => {
   };
 
   return (
-    <section className="py-24  bg-gradient-to-b from-primary/10 via-primary/5 to-primary/10 font-noto overflow-hidden relative">
+    <section className="py-24 bg-gradient-to-b from-primary/10 via-primary/5 to-primary/10 font-noto overflow-hidden relative">
       <div className="max-w-6xl w-full mx-auto px-4 sm:px-6">
         {/* Header Description / Title */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-2xl mx-auto mb-16"
+        >
           <h6 className="text-[10px] font-bold mb-4 uppercase tracking-widest text-primary font-display">
             {t.how_small}
           </h6>
@@ -71,12 +78,18 @@ const HowItWorks: React.FC = () => {
           <p className="text-sm md:text-base text-gray-600 max-w-md mx-auto leading-relaxed">
             {t.how_desc}
           </p>
-        </div>
+        </motion.div>
 
         {/* Layout Container */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Side: Steps List */}
-          <div className="flex flex-col gap-8 md:gap-12 order-2 lg:order-1 relative z-10 md:pl-4">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col gap-8 md:gap-12 order-2 lg:order-1 relative z-10 md:pl-4"
+          >
             {stepsData.map((step) => {
               const isActive = activeStep === step.id;
               return (
@@ -130,10 +143,16 @@ const HowItWorks: React.FC = () => {
                 </div>
               );
             })}
-          </div>
+          </motion.div>
 
           {/* Right Side: Phone Mockup */}
-          <div className="flex justify-center items-center order-1 lg:order-2 relative">
+          <motion.div
+            initial={{ opacity: 0, x: 30, scale: 0.95 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="flex justify-center items-center order-1 lg:order-2 relative"
+          >
             {/* Decorative background blobs */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/10 rounded-full blur-3xl pointer-events-none transition-all duration-1000" />
             <div
@@ -393,7 +412,7 @@ const HowItWorks: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

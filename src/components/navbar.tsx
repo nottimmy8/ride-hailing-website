@@ -1,4 +1,4 @@
-import { Globe, ArrowRight, ChevronDown, Check } from "lucide-react";
+import { ArrowRight, ChevronDown, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -138,75 +138,87 @@ const Navbar = () => {
 
   const handleClose = () => setIsOpen(false);
 
-  const LanguageSelector = ({ mobile = false }) => (
-    <div className="relative">
-      <button
-        onClick={() => setShowLangMenu(!showLangMenu)}
-        className={`flex items-center gap-1.5 font-semibold cursor-pointer hover:font-bold transition-colors ${
-          mobile
-            ? "   rounded-lg text-sm w-full justify-between"
-            : " rounded-md text-xs"
-        }`}
-      >
-        <div className="flex items-center gap-1.5">
-          <Globe size={mobile ? 16 : 14} className="text-gray-600" />
-          <span className="uppercase text-gray-800">{language}</span>
-        </div>
-        <ChevronDown size={14} className="text-gray-500" />
-      </button>
+  const LanguageSelector = ({ mobile = false }) => {
+    // Find the country and language entry for the currently active language
+    const allLangs = countries.flatMap((c) =>
+      c.languages.map((l) => ({ ...l, countryFlag: c.flag, countryName: c.name }))
+    );
+    const activeLang = allLangs.find((l) => l.code === language);
 
-      <AnimatePresence>
-        {showLangMenu && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className={`absolute z-50 bg-white border border-gray-100 shadow-xl rounded-xl py-2 w-64 ${
-              mobile ? "bottom-full left-0 mb-2" : "top-full right-0 mt-2"
-            }`}
-          >
-            <div className="px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 mb-1">
-              Select Region & Language
-            </div>
-            <div className="max-h-64 overflow-y-auto">
-              {countries.map((country) => (
-                <div key={country.name} className="mb-2">
-                  <div className="px-4 py-1.5 text-xs font-semibold text-gray-500 bg-gray-50/50 flex items-center gap-2">
-                    <span>{country.flag}</span>
-                    {country.name}
+    return (
+      <div className="relative">
+        <button
+          onClick={() => setShowLangMenu(!showLangMenu)}
+          className={`flex items-center gap-1.5 font-semibold cursor-pointer hover:font-bold transition-colors ${
+            mobile
+              ? "   rounded-lg text-sm w-full justify-between"
+              : " rounded-md text-xs"
+          }`}
+        >
+          <div className="flex items-center gap-1.5">
+            <span className="text-base leading-none">{activeLang?.countryFlag ?? "🌐"}</span>
+            <span className="uppercase text-gray-800 text-xs font-bold tracking-wide">{activeLang?.shortLabel ?? language.toUpperCase()}</span>
+          </div>
+          <ChevronDown size={14} className="text-gray-500" />
+        </button>
+
+        <AnimatePresence>
+          {showLangMenu && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className={`absolute z-50 bg-white border border-gray-100 shadow-xl rounded-xl py-2 w-56 ${
+                mobile ? "bottom-full left-0 mb-2" : "top-full right-0 mt-2"
+              }`}
+            >
+              <div className="px-4 py-2 text-[10px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 mb-1">
+                Select Region
+              </div>
+              <div className="max-h-64 overflow-y-auto">
+                {countries.map((country) => (
+                  <div key={country.name} className="mb-1">
+                    <div className="px-4 py-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                      <span className="text-sm">{country.flag}</span>
+                      {country.name}
+                    </div>
+                    {country.languages.map((lang) => (
+                      <button
+                        key={`${country.name}-${lang.code}`}
+                        onClick={() => {
+                          setLanguage(lang.code);
+                          setShowLangMenu(false);
+                        }}
+                        className="w-full text-left px-4 py-2 hover:bg-blue-50 transition-colors flex items-center justify-between group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`text-xs font-bold ${
+                              language === lang.code ? "text-primary" : "text-gray-500 group-hover:text-primary"
+                            }`}
+                          >
+                            {lang.shortLabel}
+                          </span>
+                          <span className={`text-xs ${
+                            language === lang.code ? "font-semibold text-gray-900" : "text-gray-600 group-hover:text-gray-900"
+                          }`}>
+                            {lang.nativeLabel}
+                          </span>
+                        </div>
+                        {language === lang.code && (
+                          <Check size={14} className="text-primary" />
+                        )}
+                      </button>
+                    ))}
                   </div>
-                  {country.languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => {
-                        setLanguage(lang.code);
-                        setShowLangMenu(false);
-                      }}
-                      className="w-full text-left px-4 py-2 hover:bg-blue-50 transition-colors flex items-center justify-between group"
-                    >
-                      <div className="flex flex-col">
-                        <span
-                          className={`text-sm ${language === lang.code ? "font-bold text-primary" : "text-gray-700 group-hover:text-primary"}`}
-                        >
-                          {lang.nativeLabel}
-                        </span>
-                        <span className="text-xs text-gray-400">
-                          {lang.label}
-                        </span>
-                      </div>
-                      {language === lang.code && (
-                        <Check size={16} className="text-primary" />
-                      )}
-                    </button>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  };
 
   return (
     <>

@@ -1,13 +1,20 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 
 const DownloadApp: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="   font-noto overflow-hidden">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 ">
-        <div className=" bg-primary rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between px-8 md:px-20 py-10 md:py-0 h-[400px] shadow-2xl">
+    <section className="font-noto overflow-hidden">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="bg-primary rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between px-8 md:px-20 py-10 md:py-0 h-[400px] shadow-2xl relative overflow-hidden"
+        >
           {/* Subtle background pattern/overlay for the banner */}
           <div className="absolute inset-0 overflow-hidden rounded-[2.5rem]">
             <div className="absolute -left-10 -bottom-10 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -33,7 +40,7 @@ const DownloadApp: React.FC = () => {
           </div>
 
           {/* Left Content */}
-          <div className="relative z-10  flex flex-col items-center md:items-start text-center md:text-left md:py-24">
+          <div className="relative z-10 flex flex-col items-center md:items-start text-center md:text-left md:py-24">
             <h2 className="text-4xl md:text-5xl lg:text-6xl md:w-[450px] font-black font-display text-white tracking-tight mb-4 leading-[1.1]">
               {t.download_heading}
             </h2>
@@ -46,7 +53,7 @@ const DownloadApp: React.FC = () => {
               {/* App Store */}
               <a
                 href="#"
-                className="flex items-center gap-3 px-6 py-3.5 bg-white text-black hover:bg-gray-50 rounded-xl transition-all duration-300 shadow-xl hover:-translate-y-1"
+                className="flex items-center gap-3 px-6 py-3.5 bg-white text-black hover:bg-gray-50 rounded-xl transition-all duration-300 shadow-xl hover:-translate-y-1 active:scale-95"
               >
                 <svg
                   className="w-8 h-8 shrink-0 text-black"
@@ -68,7 +75,7 @@ const DownloadApp: React.FC = () => {
               {/* Google Play */}
               <a
                 href="#"
-                className="flex items-center gap-3 px-6 py-3.5 bg-white text-black hover:bg-gray-50 rounded-xl transition-all duration-300 shadow-xl hover:-translate-y-1"
+                className="flex items-center gap-3 px-6 py-3.5 bg-white text-black hover:bg-gray-50 rounded-xl transition-all duration-300 shadow-xl hover:-translate-y-1 active:scale-95"
               >
                 <svg
                   className="w-8 h-8 shrink-0"
@@ -103,7 +110,7 @@ const DownloadApp: React.FC = () => {
               </a>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

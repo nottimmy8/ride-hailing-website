@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
 import {
   Car,
   User,
@@ -9,7 +10,7 @@ import {
   ChevronDown,
   Loader2,
   Share2,
-  Copy,
+  RotateCcw,
 } from "lucide-react";
 
 type RoleType = "rider" | "driver";
@@ -21,9 +22,7 @@ interface FormData {
   email: string;
   phone: string;
   location: string;
-  // Rider specific
   rideReason: string;
-  // Driver specific
   driveArea: string;
   vehicleType: string;
   vehicleDescription: string;
@@ -70,9 +69,7 @@ const RIDE_REASONS = [
 ];
 
 const VEHICLE_TYPES = ["A car", "A motorcycle"];
-
 const DRIVE_AREAS = ["Mainland", "Island", "Both (Mainland & Island)"];
-
 const DRIVER_MOTIVATIONS = [
   "Better earnings",
   "Lower commission",
@@ -81,12 +78,13 @@ const DRIVER_MOTIVATIONS = [
   "Other",
 ];
 
-const Waitlist: React.FC = () => {
+export const Waitlist: React.FC = () => {
+  const { t } = useLanguage();
   const [role, setRole] = useState<RoleType>("rider");
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [ticketNumber, setTicketNumber] = useState("");
+  const [_copied, setCopied] = useState(false);
+  const [_ticketNumber, setTicketNumber] = useState("");
 
   const [form, setForm] = useState<FormData>({
     role: "rider",
@@ -132,6 +130,9 @@ const Waitlist: React.FC = () => {
         : [...prev.driverMotivations, motivation];
       return { ...prev, driverMotivations: updated };
     });
+    if (errors.driverMotivations) {
+      setErrors((prev) => ({ ...prev, driverMotivations: "" }));
+    }
   };
 
   const validate = () => {
@@ -164,18 +165,41 @@ const Waitlist: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setLoading(true);
 
-    setTimeout(() => {
+    try {
+      const formData = new FormData();
+      Object.entries(form).forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+          formData.append(key, value.join(", "));
+        } else {
+          formData.append(key, value as string);
+        }
+      });
+      formData.append("timestamp", new Date().toISOString());
+
+      await fetch(
+        "https://script.google.com/u/3/home/projects/1gGRnoGggKz9x950ftQPTVtAy2egnSt8vUwki07Z26Yz4tJ3HqJOY6Fh3/edit",
+        {
+          method: "POST",
+          body: formData,
+          // mode: "no-cors",
+        },
+      );
+
       const randomTicket = Math.floor(1000 + Math.random() * 9000).toString();
       setTicketNumber(randomTicket);
-      setLoading(false);
       setSubmitted(true);
-    }, 1200);
+    } catch (error) {
+      console.error("Error submitting to waitlist:", error);
+      // alert("There was an error submitting your form. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCopyLink = () => {
@@ -184,8 +208,25 @@ const Waitlist: React.FC = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Join the Keyen Waitlist",
+          text: "I just joined the waitlist for Keyen!",
+          url: window.location.href,
+        });
+      } catch (err) {
+        console.error("Share failed:", err);
+      }
+    } else {
+      handleCopyLink();
+    }
+  };
+
   const resetForm = () => {
     setSubmitted(false);
+    setRole("rider");
     setForm({
       role: "rider",
       firstName: "",
@@ -211,18 +252,34 @@ const Waitlist: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Headline & Subheadline */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28">
+          {/* Left Column */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 lg:sticky lg:top-28"
+          >
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-black font-display text-gray-900 tracking-tight leading-[1.1] mb-6">
-              Join the waitlist
+              {t.waitlist_title}
             </h1>
             <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-lg">
-              Fill the form to be the first to know when this goes live
+              {t.waitlist_desc}
             </p>
-          </div>
+          </motion.div>
 
-          {/* Right Column: Single Form */}
-          <div className="lg:col-span-7">
+          {/* Right Column */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{
+              duration: 0.7,
+              delay: 0.15,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="lg:col-span-7"
+          >
             {!submitted ? (
               <div className="max-w-2xl">
                 {/* Role Selector */}
@@ -232,34 +289,34 @@ const Waitlist: React.FC = () => {
                       type="button"
                       id="role-rider-btn"
                       onClick={() => handleRoleChange("rider")}
-                      className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                      className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm transition-all duration-200 cursor-pointer ${
                         role === "rider"
                           ? "bg-white text-gray-900 shadow-sm font-bold"
-                          : "text-gray-500 hover:text-gray-800"
+                          : "text-gray-500 hover:text-gray-800 font-semibold"
                       }`}
                     >
                       <User className="w-4 h-4" />
-                      <span>I need a ride</span>
+                      <span>{t.waitlist_rider}</span>
                     </button>
 
                     <button
                       type="button"
                       id="role-driver-btn"
                       onClick={() => handleRoleChange("driver")}
-                      className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                      className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm transition-all duration-200 cursor-pointer ${
                         role === "driver"
                           ? "bg-white text-gray-900 shadow-sm font-bold"
-                          : "text-gray-500 hover:text-gray-800"
+                          : "text-gray-500 hover:text-gray-800 font-semibold"
                       }`}
                     >
                       <Car className="w-4 h-4" />
-                      <span>I want to drive</span>
+                      <span>{t.waitlist_driver}</span>
                     </button>
                   </div>
                 </div>
 
                 <form onSubmit={handleSubmit} noValidate className="space-y-6">
-                  {/* First name & Last name */}
+                  {/* First Name & Last Name */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label
@@ -310,7 +367,7 @@ const Waitlist: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Email address */}
+                  {/* Email */}
                   <div>
                     <label
                       htmlFor="email"
@@ -338,7 +395,7 @@ const Waitlist: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Phone Number */}
+                  {/* Phone */}
                   <div>
                     <label
                       htmlFor="phone"
@@ -351,7 +408,7 @@ const Waitlist: React.FC = () => {
                         </span>
                       ) : (
                         <span className="text-gray-400 text-xs font-normal">
-                          (Optional to Rider)
+                          (Optional for Rider)
                         </span>
                       )}
                     </label>
@@ -375,14 +432,13 @@ const Waitlist: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Location (LGA Dropdown) */}
+                  {/* Location */}
                   <div>
                     <label
                       htmlFor="location"
                       className="block text-sm font-medium text-gray-800 mb-2"
                     >
-                      Location (Dropdown menu with LGA areas){" "}
-                      <span className="text-red-500">*</span>
+                      Location / LGA <span className="text-red-500">*</span>
                     </label>
                     <div className="relative">
                       <select
@@ -412,7 +468,7 @@ const Waitlist: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Conditional Fields: Rider */}
+                  {/* Dynamic Rider / Driver Fields */}
                   <AnimatePresence mode="wait">
                     {role === "rider" ? (
                       <motion.div
@@ -428,7 +484,7 @@ const Waitlist: React.FC = () => {
                             htmlFor="rideReason"
                             className="block text-sm font-medium text-gray-800 mb-2"
                           >
-                            Why do you need a ride? (Rider)
+                            Why do you need a ride?
                           </label>
                           <div className="relative">
                             <select
@@ -438,7 +494,7 @@ const Waitlist: React.FC = () => {
                               onChange={handleInputChange}
                               className="w-full appearance-none px-4 py-3 pr-10 rounded-lg border border-gray-200 text-sm text-gray-900 bg-white transition-all focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                             >
-                              <option value="">Select an option</option>
+                              <option value="">Select an option...</option>
                               {RIDE_REASONS.map((reason) => (
                                 <option key={reason} value={reason}>
                                   {reason}
@@ -450,7 +506,6 @@ const Waitlist: React.FC = () => {
                         </div>
                       </motion.div>
                     ) : (
-                      /* Conditional Fields: Driver */
                       <motion.div
                         key="driver-fields"
                         initial={{ opacity: 0, y: 6 }}
@@ -459,13 +514,13 @@ const Waitlist: React.FC = () => {
                         transition={{ duration: 0.2 }}
                         className="space-y-6 pt-2"
                       >
-                        {/* Where do you mainly drive */}
+                        {/* Drive Area */}
                         <div>
                           <label
                             htmlFor="driveArea"
                             className="block text-sm font-medium text-gray-800 mb-2"
                           >
-                            Where do you mainly drive(mainland/island){" "}
+                            Where do you mainly drive?{" "}
                             <span className="text-red-500">*</span>
                           </label>
                           <div className="relative">
@@ -498,13 +553,13 @@ const Waitlist: React.FC = () => {
                           )}
                         </div>
 
-                        {/* What type of vehicle do you drive? */}
+                        {/* Vehicle Type */}
                         <div>
                           <label
                             htmlFor="vehicleType"
                             className="block text-sm font-medium text-gray-800 mb-2"
                           >
-                            What type of vehicle do you drive? (Driver){" "}
+                            What type of vehicle do you drive?{" "}
                             <span className="text-red-500">*</span>
                           </label>
                           <div className="relative">
@@ -519,9 +574,7 @@ const Waitlist: React.FC = () => {
                                   : "border-gray-200 focus:border-primary focus:ring-primary"
                               }`}
                             >
-                              <option value="">
-                                A car/A motorcycle (Dropdown menu)
-                              </option>
+                              <option value="">Select vehicle type...</option>
                               {VEHICLE_TYPES.map((type) => (
                                 <option key={type} value={type}>
                                   {type}
@@ -537,13 +590,16 @@ const Waitlist: React.FC = () => {
                           )}
                         </div>
 
-                        {/* Vehicle description */}
+                        {/* Vehicle Description */}
                         <div>
                           <label
                             htmlFor="vehicleDescription"
                             className="block text-sm font-medium text-gray-800 mb-2"
                           >
-                            Vehicle description
+                            Vehicle Description{" "}
+                            <span className="text-gray-400 text-xs font-normal">
+                              (Optional)
+                            </span>
                           </label>
                           <input
                             type="text"
@@ -556,23 +612,24 @@ const Waitlist: React.FC = () => {
                           />
                         </div>
 
-                        {/* What would make you consider driving with Keyen? */}
+                        {/* Motivations */}
                         <div>
                           <label className="block text-sm font-medium text-gray-800 mb-3">
-                            What would make you consider driving with Keyen?
-                            (Driver) <span className="text-red-500">*</span>
+                            What would make you consider driving with Keyen?{" "}
+                            <span className="text-red-500">*</span>
                           </label>
                           <div className="space-y-2.5">
                             {DRIVER_MOTIVATIONS.map((motivation) => {
                               const isChecked =
                                 form.driverMotivations.includes(motivation);
                               return (
-                                <label
+                                <button
+                                  type="button"
                                   key={motivation}
                                   onClick={() =>
                                     handleMotivationToggle(motivation)
                                   }
-                                  className="flex items-center gap-3 cursor-pointer select-none text-sm text-gray-700 hover:text-gray-900"
+                                  className="flex items-center gap-3 cursor-pointer select-none text-sm text-gray-700 hover:text-gray-900 text-left w-full focus:outline-none"
                                 >
                                   <div
                                     className={`w-4 h-4 rounded flex items-center justify-center transition-colors ${
@@ -586,7 +643,7 @@ const Waitlist: React.FC = () => {
                                     )}
                                   </div>
                                   <span>{motivation}</span>
-                                </label>
+                                </button>
                               );
                             })}
                           </div>
@@ -609,37 +666,37 @@ const Waitlist: React.FC = () => {
                           )}
                         </div>
 
-                        {/* Would you submit to a vehicle inspection? */}
+                        {/* Vehicle Inspection */}
                         <div>
                           <label className="block text-sm font-medium text-gray-800 mb-2.5">
-                            Would you submit to a vehicle inspection? (Driver)
-                            (Yes/no) <span className="text-red-500">*</span>
+                            Would you submit to a vehicle inspection?{" "}
+                            <span className="text-red-500">*</span>
                           </label>
                           <div className="flex gap-4">
                             {(["yes", "no"] as const).map((option) => (
-                              <label
+                              <button
+                                type="button"
                                 key={option}
+                                onClick={() => {
+                                  setForm((prev) => ({
+                                    ...prev,
+                                    vehicleInspection: option,
+                                  }));
+                                  if (errors.vehicleInspection) {
+                                    setErrors((prev) => ({
+                                      ...prev,
+                                      vehicleInspection: "",
+                                    }));
+                                  }
+                                }}
                                 className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border text-sm font-medium cursor-pointer transition-all ${
                                   form.vehicleInspection === option
                                     ? "bg-primary text-white border-primary"
                                     : "bg-white border-gray-200 text-gray-700 hover:border-gray-300"
                                 }`}
                               >
-                                <input
-                                  type="radio"
-                                  name="vehicleInspection"
-                                  value={option}
-                                  checked={form.vehicleInspection === option}
-                                  onChange={() =>
-                                    setForm((prev) => ({
-                                      ...prev,
-                                      vehicleInspection: option,
-                                    }))
-                                  }
-                                  className="sr-only"
-                                />
                                 <span>{option === "yes" ? "Yes" : "No"}</span>
-                              </label>
+                              </button>
                             ))}
                           </div>
                           {errors.vehicleInspection && (
@@ -652,7 +709,7 @@ const Waitlist: React.FC = () => {
                     )}
                   </AnimatePresence>
 
-                  {/* CTA Button */}
+                  {/* Submit Button */}
                   <div className="pt-4">
                     <button
                       type="submit"
@@ -663,11 +720,11 @@ const Waitlist: React.FC = () => {
                       {loading ? (
                         <>
                           <Loader2 className="w-5 h-5 animate-spin" />
-                          Joining...
+                          <span>Joining...</span>
                         </>
                       ) : (
                         <>
-                          Join the waitlist.
+                          <span>Join the waitlist</span>
                           <ArrowRight className="w-4 h-4" />
                         </>
                       )}
@@ -676,66 +733,85 @@ const Waitlist: React.FC = () => {
                 </form>
               </div>
             ) : (
-              /* Success State */
+              /* Complete Success State */
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="py-12 text-left"
+                className="py-12 text-left max-w-xl"
               >
                 <div className="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mb-6">
                   <CheckCircle2 className="w-9 h-9" />
                 </div>
 
-                <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold font-display uppercase tracking-wider mb-3">
+                {/* <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold font-display uppercase tracking-wider mb-3">
                   Ticket #KYN-{ticketNumber}
-                </div>
+                </div> */}
 
-                <h3 className="text-3xl font-black font-display text-gray-900 mb-3 tracking-tight">
-                  You're on the waitlist!
+                <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mb-3">
+                  You're on the list!
                 </h3>
 
-                <p className="text-gray-600 text-base leading-relaxed mb-8 max-w-lg">
+                <p className="text-gray-600 text-base leading-relaxed mb-8">
                   Thank you,{" "}
-                  <strong className="text-gray-900">{form.firstName}</strong>!
-                  We've reserved your spot as a{" "}
-                  <strong className="text-primary capitalize">{role}</strong> in{" "}
-                  <strong className="text-gray-900">{form.location}</strong>.
-                  We'll be in touch at{" "}
-                  <span className="text-primary font-semibold">
+                  <span className="font-semibold text-gray-800">
+                    {form.firstName}
+                  </span>
+                  . We've saved your spot. We'll send an exclusive invite to{" "}
+                  <span className="font-semibold text-gray-800">
                     {form.email}
                   </span>{" "}
-                  when we go live.
+                  as soon as Keyen is ready in {form.location || "your area"}.
                 </p>
 
-                <div className="flex flex-wrap gap-4">
-                  <button
-                    onClick={handleCopyLink}
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors cursor-pointer"
-                  >
-                    {copied ? (
-                      <>
-                        <Check className="w-4 h-4 text-green-600" />
-                        Link Copied!
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-4 h-4" />
-                        Copy Waitlist Link
-                      </>
-                    )}
-                  </button>
+                {/* Share / Copy Actions */}
+                <div className="space-y-4 pt-4 border-t border-gray-100">
+                  <p className="text-sm font-medium text-gray-700">
+                    Spread the word with friends & colleagues
+                  </p>
+                  <div className="flex flex-wrap items-center gap-3">
+                    {/* <button
+                      type="button"
+                      onClick={handleCopyLink}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="w-4 h-4 text-green-600" />
+                          <span>Link copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          <span>Copy link</span>
+                        </>
+                      )}
+                    </button> */}
 
+                    <button
+                      type="button"
+                      onClick={handleShare}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      <span>Share waitlist</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Submit another entry */}
+                <div className="mt-10">
                   <button
+                    type="button"
                     onClick={resetForm}
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-medium hover:bg-blue-700 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-gray-800 transition-colors"
                   >
-                    <Share2 className="w-4 h-4" />
-                    Submit Another
+                    <RotateCcw className="w-3.5 h-3.5" />
+                    <span>Submit another response</span>
                   </button>
                 </div>
               </motion.div>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

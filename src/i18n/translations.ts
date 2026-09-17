@@ -12,7 +12,7 @@ export type LangCode = "en" | "yo" | "ha" | "ig" | "fr" | "ew" | "fon";
 export interface Country {
   name: string;
   flag: string;
-  languages: { code: LangCode; label: string; nativeLabel: string }[];
+  languages: { code: LangCode; label: string; nativeLabel: string; shortLabel: string }[];
 }
 
 export const countries: Country[] = [
@@ -20,26 +20,26 @@ export const countries: Country[] = [
     name: "Nigeria",
     flag: "🇳🇬",
     languages: [
-      { code: "en", label: "English", nativeLabel: "English" },
-      { code: "yo", label: "Yoruba", nativeLabel: "Yorùbá" },
-      { code: "ha", label: "Hausa", nativeLabel: "Hausa" },
-      { code: "ig", label: "Igbo", nativeLabel: "Igbo" },
+      { code: "en", label: "English", nativeLabel: "English", shortLabel: "EN" },
+      { code: "yo", label: "Yoruba", nativeLabel: "Yorùbá", shortLabel: "YO" },
+      { code: "ha", label: "Hausa", nativeLabel: "Hausa", shortLabel: "HA" },
+      { code: "ig", label: "Igbo", nativeLabel: "Igbo", shortLabel: "IG" },
     ],
   },
   {
     name: "Togo",
     flag: "🇹🇬",
     languages: [
-      { code: "fr", label: "French", nativeLabel: "Français" },
-      { code: "ew", label: "Ewe", nativeLabel: "Eʋegbe" },
+      { code: "fr", label: "French", nativeLabel: "Français", shortLabel: "FR" },
+      { code: "ew", label: "Ewe", nativeLabel: "Eʋegbe", shortLabel: "EW" },
     ],
   },
   {
     name: "Benin Republic",
     flag: "🇧🇯",
     languages: [
-      { code: "fr", label: "French", nativeLabel: "Français" },
-      { code: "fon", label: "Fon", nativeLabel: "Fon gbe" },
+      { code: "fr", label: "French", nativeLabel: "Français", shortLabel: "FR" },
+      { code: "fon", label: "Fon", nativeLabel: "Fon gbe", shortLabel: "FON" },
     ],
   },
 ];
